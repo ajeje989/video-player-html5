@@ -170,6 +170,22 @@ canvas{
     z-index:-1;
 }
 
+  #aghettoradiov4 {
+  -webkit-border-top-left-radius: 10px;
+    -webkit-border-top-right-radius: 10px;
+    -webkit-border-bottom-right-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-radius-topleft: 10px;
+    -moz-border-radius-topright: 10px;
+    -moz-border-radius-bottomright: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border: 0px none rgb(255, 255, 255);}
+
+
 </style>
 
 
@@ -187,9 +203,7 @@ canvas{
                     </header>
 
                     <div class="jd__clock">
-
-                      <iframe src="https://play.server89.com/radioardorecentro/" scrolling="no" width="270px" height="400px">
-
+                         <div id="aghettoradiov4" style="height:400px; width:270px;"></div>
                         </div>
                     </div>
                 </div>
@@ -202,5 +216,50 @@ canvas{
         </div>
         <canvas id="jd__canvas"></canvas>
         <script src="zara.js"></script>
+
+
+
+        <script>
+        $("#aghettoradiov4").flashradio({
+
+             userinterface: "big",
+             backgroundcolor: "#000000",
+             themecolor: "#FF0000",
+             themefontcolor: "#ffffff",
+             startvolume: "100",
+             radioname: "",
+             scroll: "auto",
+             autoplay: "true",
+             useanalyzer: "real",
+             analyzertype: "8",
+             usecover: "false",
+             logo: "https://i.imgur.com/lhR8LvA.jpg",
+             usestreamcorsproxy: "false",
+             getcoveroverradioco: "true",
+             debug: "false",
+             ownsongtitleurl: "",
+             radiocover: "default.png",
+             songgooglefontname: "Oleo Script:cursive",
+             songfontname: "Oleo Script",
+             titlegooglefontname: "Girassol:cursive",
+             titlefontname: "Girassol",
+             corsproxy: "https://cors.server89.com/cors/",
+             streamprefix: "",
+             mountpoint: "",
+             radiouid: "",
+             apikey: "",
+             radiojar: "",
+             radioco: "",
+             streamid: "1",
+             streampath: "/live",
+             streamtype: "shoutcast2",
+             streamurl: "https://ssl5.server89.com:8103",
+             songinformationinterval: "10000",
+        });
+
+      
+        </script>
+
+
     </body>
 </html>
