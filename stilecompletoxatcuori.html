@@ -1,0 +1,312 @@
+<!-- THIS PAGE IS CREATED BY jason -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>STILE COMPLETO XAT CON CUORI</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Oswald&family=Poiret+One&family=Roboto+Mono:wght@200&display=swap" rel="stylesheet">
+
+        <style>
+        ody{
+   background:linear-gradient(to bottom right, #00020F, #013162);
+   min-height:100vh;
+   overflow:hidden;
+}
+*{
+   margin:0;
+   padding:0;
+   box-sizing:border-box;
+}
+:root{
+   --font-1: 'Oswald', sans-serif;
+   --font-2: 'Fredoka One', cursive;
+   --font-3: 'Poiret One', cursive;
+   --font-4: 'Roboto Mono', monospace;
+}
+:before,
+:after{
+   content: '';
+   position:absolute;
+}
+canvas{
+   position:absolute;
+   top:0;
+   left:0;
+   z-index:-1;
+}
+.jd__app{
+   width:100%;
+   height:100vh;
+   position:relative;
+   font-family:var(--font-3);
+   color:#FFF;
+   font-size:1em;
+   overflow:hidden;
+   background:linear-gradient(135deg, #1B4B7B 300px, transparent 301px);
+}
+.jd__aside{
+   width:250px;
+   height:150px;
+   position:absolute;
+   top:80px;
+   left:0;
+}
+.jd__icon{
+   width:120px;
+   height:120px;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   font-family:var(--font-2);
+   border-radius:50%;
+   background:#061F3E;
+   color:rgba(255,255,255,.2);
+   font-size:6em;
+   font-weight:300;
+   margin-left:65px;
+}
+.jd__container{
+   position:relative;
+   width:728px;
+   height:100vh;
+   margin:0 auto;
+   z-index:1000;
+}
+.jd__inner{
+   width:728px;
+   height:486px;
+   position:absolute;
+   top:80px;
+   left:0;
+   background:radial-gradient(620px 620px ellipse at -100px center, #1F3B63 620px, transparent 621px), #FEB750;
+}
+.jd__inner:after{
+   width:75%;
+   height:50px;
+   background:#000;
+   border-radius:50%;
+   filter:blur(25px);
+   left:12.5%;
+   bottom:-20px;
+   z-index:-1;
+}
+.jd__inner__xat{
+   width:524px;
+   height:325px;
+   border-radius:8px;
+   position:absolute;
+   top:9px;
+   left:11px;
+   background:linear-gradient(to bottom right, rgba(255,255,255,.4), rgba(255,255,255,.1));
+}
+.jd__inner__xat:before,
+.jd__inner__xat:after{
+   border-radius:8px;
+   background:linear-gradient(to bottom right, rgba(255,255,255,.4), rgba(255,255,255,.1));
+}
+.jd__inner__xat:before{
+   width:171px;
+   height:325px;
+   top:0;
+   left:calc(100% + 12px);
+}
+.jd__inner__xat:after{
+   width:481px;
+   height:71px;
+   left:0;
+   top:calc(100% + 72px);
+}
+.jd__letter{
+   width:262px;
+   height:125px;
+   position:relative;
+   top:100px;
+   left:240px;
+   z-index:1000;
+}
+.jd__letter h1{
+   width:100%;
+   height:70px;
+   line-height:70px;
+   background:url(https://i.postimg.cc/BbFX0NR2/logo-xat.png)left center no-repeat;
+   background-size:94px;
+   padding-left:85px;
+   font-weight:300;
+   font-size:4em;
+   font-family:var(--font-2);
+}
+.jd__box{
+   width:100%;
+   height:70px;
+   border:solid 1px #FEB750;
+   margin-top:5px;
+   text-align:center;
+   padding:5px;
+   position:relative;
+}
+.jd__box h2{
+   color:#fff;
+   line-height:20px;
+   font-family:var(--font-4);
+   width:calc(100% - 10px);
+   position:absolute;
+   top:5px;
+   left:5px;
+   font-weight:lighter;
+   font-size:1em;
+}
+        </style>
+    </head>
+
+    <body>
+        <div class="jd__app">
+            <div class="jd__aside">
+                <h1 class="jd__icon">?</h1>
+            </div>
+            <div class="jd__container">
+                <div class="jd__inner">
+                    <div class="jd__inner__xat"></div>
+                    <div class="jd__letter">
+                        <h1>Ajuda</h1>
+                        <div class="jd__box" id="box">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <canvas id="canvas"></canvas>
+
+
+        <script>
+        var canvas = document.querySelector('canvas');
+var _txt = document.createElement('h2');
+var box = document.querySelector('#box');
+var ctx = canvas.getContext('2d');
+
+var text = [
+ 'O novo xat é moderno, leve e seguro.',
+ 'E o melhor de tudo, não precisa baixar nada! Zero downloads.',
+ 'O mesmo xat.com só que agora melhor, e no mesmo lugar: xat.com.',
+ 'Seja bem vindo ao chat oficial de ajuda. Faça sua pergunta!',
+ 'Fundo by JasonOficial'
+];
+var objs = [];
+var maxObj = 70;
+var size = 20;
+var count = 0;
+
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+window.addEventListener('resize', function(){
+ canvas.width = innerWidth;
+ canvas.height = innerHeight;
+});
+
+box.appendChild(_txt);
+
+function initText(elem){
+ var objs = elem.innerHTML.split('');
+ elem.innerHTML = '';
+ objs.forEach(function(obj, i){
+     setTimeout(function(){
+         elem.innerHTML += obj;
+     }, 175 * i);
+ });
+}
+
+function reading(){
+ text.forEach(function(txt, j){
+     setTimeout(function(){
+         _txt.innerHTML = txt;
+         initText(_txt);
+         count++;
+
+         if(count === text.length){
+             setTimeout(function(){
+                 count = 0;
+                 this.reading();
+             }, 15000);
+         }
+     }, 15000 * j);
+ });
+}
+
+var img = new Image();
+img.src = 'http://u.cubeupload.com/jasondesign/angelsmallp.png';
+img.onLoad = function(){
+ console.log('carregando imagem');
+}
+var objs = [];
+
+function init(){
+ objs = [];
+ for(var i = 0; i < 20; i++){
+     var px = Math.random() * (innerWidth - 192);
+     var vx = (Math.random() * 1);
+     var vy = (Math.random() * 1);
+
+     objs.push(new Sprites(img, px, vx, vy));
+ }
+}
+
+function loop(){
+ requestAnimationFrame(loop, canvas);
+
+ ctx.clearRect(0, 0, innerWidth, innerHeight);
+ for(var i in objs){
+     var obj = objs[i];
+     obj.draw(ctx);
+     obj.update();
+ }
+}
+
+function Sprites(img, px, vx, vy){
+ this.cordX = 0;
+ this.cordY = 0;
+ this.width = 96;
+ this.height = 100;
+ this.posX = px;
+ this.posY = innerHeight + this.height;
+ this.img = img;
+ this.count = 0;
+ this.vx = vx;
+ this.vy = vy;
+
+ this.draw = function(ctx){
+     ctx.drawImage(this.img, this.cordX, this.cordY, this.width, this.height, this.posX, this.posY, this.width, this.height);
+
+     this.mov();
+ }
+
+ this.update = function (){
+     if(this.posX + this.width > innerWidth || this.posX < 0){
+         this.vx = - this.vx;
+     }
+     if(this.posY + this.height > innerHeight){
+         this.vy = + this.vy;
+     }else if(this.posY + this.height < 0){
+         this.posY = innerHeight + this.height;
+         this.posY += this.vy;
+     }
+     this.posX += this.vx;
+     this.posY -= this.vy;
+ }
+
+ this.mov = function(){
+     this.count++;
+     if(this.count >= 50){
+         this.count = 0;
+     }
+     this.cordX = Math.floor(this.count / 5) * this.width;
+ }
+}
+
+loop();
+init();
+reading();
+        </script>
+    </body>
+</html>
