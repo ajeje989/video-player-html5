@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta charset="utf-8">
+        <title>SFONDO AD ORARI CON OROLOGIO</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Server89.com">
+        <link href="https://fonts.googleapis.com/css2?family=Merienda+One&display=swap" rel="stylesheet">
+
+<style>
+body{background:#000;margin:0;overflow:hidden}
+div#wall{display:block;position:absolute;width:100%;height:100%;z-index:-1;pointer-events:none}
+div#clock,div#wall .wall-image{position:absolute;pointer-events:none;opacity:0;transition:opacity 3s}
+div#wall .wall-image{display:block;width:100%;height:100%;object-fit:cover}
+div#clock{display:inline-block;bottom:48px;left:24px;font-size:2.35vmax;  font-family: 'Merienda One', cursive; height:64px;line-height:100%;color:#fff;text-shadow:0 0 1.5px #000}
+</style>
+
+<script>
+var timePrefs = {
+    "times": [
+        {
+            "hour": [6, 17],
+            "background": "https://i.postimg.cc/tqpKsGtj/day.png", /* SFONDO DI GIORNO */
+            "clock": true,
+            "clock_position": ["128px", "", "", "24px"] /* TRBL */
+        },
+        {
+            "hour": [18, 5],
+            "background": "https://i.postimg.cc/66QFhVmb/night.png", /* SFONDO DI SERA */
+            "clock": true,
+            "clock_position": ["128px", "", "", "24px"] /* TRBL */
+        }
+    ]
+};
+
+function doPrefs(){
+    currentTimeInt = getLocalTimeInt();
+    currentTime = getLocalTime();
+    updateLoop = setInterval(updateIntv, 500);
+}
+</script>
+
+<script type="text/javascript">
+var updateLoop,currentTimeInt=0,lastId=-1,lastHour=-1;String.prototype.splitInt=function(a,b){for(var c=this.split(a,b),e=[],d=0;c.length>d;d++)e.push(parseInt(c[d]));return e};Element.prototype.remove=function(){this.parentElement.removeChild(this)};NodeList.prototype.remove=HTMLCollection.prototype.remove=function(){for(var a=this.length-1;0<=a;a--)this[a]&&this[a].parentElement&&this[a].parentElement.removeChild(this[a])};
+function hourRange(a,b,c){for(a%=24;c!=b;){if(b==a||c==a)return!0;b=(b+1)%24}return!1}function getLocalTime(){var a=new Date;return Intl.DateTimeFormat("default",{hour:"numeric",minute:"numeric",second:"numeric"}).format(a)}function getLocalTimeInt(){var a=new Date;return Intl.DateTimeFormat("default",{hour:"numeric",minute:"numeric",hour12:!1}).format(a).splitInt(":",2)}
+function loadImage(a){var b=document.createElement("img");b.setAttribute("class","wall-image");b.setAttribute("id","current-wall");b.src=a;b.onload=function(a){a.target.style.opacity="1"};b.ontransitionend=function(){1<document.querySelectorAll("img.wall-image").length&&document.querySelector("img.wall-image").remove()};document.querySelector("div#wall").appendChild(b)}
+function loadClock(a){for(var b=document.querySelector("div#clock"),c=0;4>c;c++)""!=a[c]&&(b.style[["top","right","bottom","left"][c]]=a[c].replace(/[^\w%]/g,""));b.style.opacity="0.8"}
+function updateIntv(){currentTimeInt=getLocalTimeInt();currentTime=getLocalTime();document.querySelector("div#clock")&&(document.querySelector("div#clock").innerText=currentTime);if(currentTimeInt[0]==lastHour)return!1;for(var a=0;timePrefs.times.length>a;a++){var b=timePrefs.times[a],c=currentTimeInt[0];if(hourRange(c,b.hour[0],b.hour[1])&&lastId!=a){lastId=a;lastHour=c;loadImage(b.background);document.querySelector("div#clock").style.transition="none";document.querySelector("div#clock").style.opacity=
+"";document.querySelector("div#clock").style.transition="opacity 3s";b.clock&&loadClock(b.clock_position);break}}}function init(){doPrefs()}window.addEventListener("load",init);
+</script>
+
+
+  </head>
+  <body>
+        <div id="wall">
+        </div>
+        <div id="clock">
+            0:00:00
+        </div>
+  </body>
+</html>
